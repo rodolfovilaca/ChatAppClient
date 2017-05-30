@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 
 
-<VBox fx:controller="ChatController" xmlns:fx="http://javafx.com/fxml" spacing="10">
+<VBox fx:controller="br.chatapp.controllers.ChatController" xmlns:fx="http://javafx.com/fxml" spacing="10">
 
 </VBox>
 

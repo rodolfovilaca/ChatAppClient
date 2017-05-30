@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 
-<VBox fx:controller="LoginController" xmlns:fx="http://javafx.com/fxml" spacing="10">
+<VBox fx:controller="br.chatapp.views.login.LoginView" xmlns:fx="http://javafx.com/fxml" spacing="10">
 	<HBox spacing="10">
 		<Label text="Nome:"/>
 		<TextField fx:id="name"/>

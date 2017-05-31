@@ -1,11 +1,9 @@
 package br.chatapp.dao;
 
-/**
- * Created by daniel on 2017-05-29.
- */
+
 public class Usuario {
 
-    String nome;
+    private String nome;
 
     public Usuario(String nome) {
         this.nome = nome;
@@ -19,7 +17,7 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public Boolean salvar() {
+    public boolean salvar() {
         // TODO
         return true;
     }

@@ -8,9 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * Created by daniel on 2017-05-29.
- */
+
 public class GerenciadorDeTela {
 
     private static Stage mainStage;
@@ -23,7 +21,8 @@ public class GerenciadorDeTela {
     public static void carregaStage(String fxml, String titulo, int largura, int altura, Object classe) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(classe.getClass().getResource(fxml));
+        	root = FXMLLoader.load(classe.getClass().getResource(fxml));
+        	
         } catch (IOException e) {
             e.printStackTrace();
         }

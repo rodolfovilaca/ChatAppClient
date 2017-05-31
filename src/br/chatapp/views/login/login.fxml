@@ -12,4 +12,5 @@
 		<TextField fx:id="name"/>
 	</HBox>
 	<Button fx:id="loginBtn" text="Login"/>
+	<Label fx:id="erro"/>
 </VBox>

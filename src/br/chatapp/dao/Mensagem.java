@@ -6,8 +6,6 @@ import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Mensagem {
@@ -51,12 +49,17 @@ public class Mensagem {
     }
 
     public boolean enviar() {
-        return BancoDeDados.inserir(ADICIONAR_MENSAGEM+"('"+this.getMensagem()+"','"+this.getUsuario().getNome()+"')");
+        boolean enviado = BancoDeDados.inserir(ADICIONAR_MENSAGEM+"('"+this.getMensagem()+"','"+this.getUsuario().getNome()+"')");
+        if (enviado) {
+            lista.add(this);
+            return true;
+        }
+        return false;
     }
 
     public static ObservableList<Mensagem> buscarTodas() {
-        List<Mensagem> listaDeMensagens = new ArrayList<>();
         try (ResultSet resultSet = BancoDeDados.buscar("SELECT * FROM lista")) {
+            lista = FXCollections.observableArrayList();
             while(resultSet.next()) {
                 Mensagem.addItemLista(
                         new Mensagem(resultSet.getString("mensagem"), new Usuario(resultSet.getString("usuario")))

@@ -4,15 +4,13 @@ import br.chatapp.dao.Mensagem;
 import br.chatapp.dao.Usuario;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-
 public class ChatController {
 
     public boolean enviarMensagem(String texto, Usuario usuario) {
         //TODO
     	Mensagem mensagem = new Mensagem(texto,usuario);
-    	mensagem.enviar(mensagem);
-        return true;
+    	boolean enviado = mensagem.enviar();
+    	return enviado;
     }
 
     public ObservableList<Mensagem> carregarMensagens() {

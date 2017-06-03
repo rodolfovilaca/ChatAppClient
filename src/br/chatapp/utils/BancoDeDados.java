@@ -1,7 +1,5 @@
 package br.chatapp.utils;
 
-import br.chatapp.dao.Mensagem;
-
 import java.sql.*;
 
 
@@ -56,18 +54,7 @@ public class BancoDeDados {
 		}
 		return false;
 	}
-    
-    public static boolean adicionarMensagemBD(Mensagem msg){
-    	try(Statement declaracao = conexao.createStatement()){
-    		declaracao.execute(ADICIONAR_MENSAGEM+"('"+msg.getMensagem()+"','"+msg.getUsuario().getNome()+"')");
-    		System.out.println("add MSG");
-    		return true;
-    	}catch (SQLException e) {
-    		System.out.println("SQL Exception" + e.getMessage() + " SQL state: "+ e.getSQLState());
-		}
-    	return false;
-    }
-    
+
     
     public static void fecharConexao(){
     	try{

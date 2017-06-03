@@ -2,20 +2,13 @@ package br.chatapp.views.chat;
 
 import br.chatapp.controllers.ChatController;
 import br.chatapp.dao.Mensagem;
-import br.chatapp.dao.Usuario;
 import br.chatapp.dao.UsuarioSingleton;
-import br.chatapp.utils.BancoDeDados;
 import br.chatapp.views.GerenciadorDeTela;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Cell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -58,10 +51,14 @@ public class ChatView implements Initializable {
     	listaChat.setCellFactory(cell -> new ListaChatCell());
     	
     	botaoEnviar.setOnAction(event ->{
-    		controller.enviarMensagem(areaTexto.getText(), UsuarioSingleton.get());
-    		areaTexto.setText("");
-    		BancoDeDados.queryTodasMensagens();
-    		//alguma função pra enviar mensagem
+    		boolean enviado = controller.enviarMensagem(areaTexto.getText(), UsuarioSingleton.get());
+    		if (!enviado) {
+    		    areaTexto.setText("DEU MERDA NO ENVIO!");
+            } else {
+                areaTexto.setText("");
+            }
+            Mensagem.buscarTodas();
+    		//alguma funï¿½ï¿½o pra enviar mensagem
     	});
     	
 //        ChatController controller = new ChatController();

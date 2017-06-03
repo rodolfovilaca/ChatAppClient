@@ -1,5 +1,6 @@
 package br.chatapp;
 
+import br.chatapp.dao.Mensagem;
 import br.chatapp.utils.BancoDeDados;
 import br.chatapp.views.GerenciadorDeTela;
 import javafx.application.Application;
@@ -19,6 +20,8 @@ public class Main extends Application {
 	public void init() throws Exception {
 		super.init();
 		conectadoComSucesso = BancoDeDados.conectar();
+		// Buscar todas as mensagens
+		Mensagem.buscarTodas();
 	}
 
 	@Override

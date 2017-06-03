@@ -13,15 +13,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="inheritedJdk" />
-    <orderEntry type="module-library">
-      <library name="sqlite-jdbc-3.18.0.jar">
-        <CLASSES>
-          <root url="file://C:/Users/conra/Downloads/sqlite-jdbc-3.18.0.jar" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
+    <orderEntry type="library" exported="" name="sqlite-jdbc-3.18.0" level="project" />
   </component>
 </module>

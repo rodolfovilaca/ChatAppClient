@@ -1,11 +1,12 @@
 package br.chatapp.dao;
 
-import br.chatapp.utils.BancoDeDados;
+import br.chatapp.utils.db.BancoDeDados;
+import br.chatapp.utils.db.Row;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 
 public class Mensagem {
@@ -58,16 +59,28 @@ public class Mensagem {
     }
 
     public static ObservableList<Mensagem> buscarTodas() {
-        try (ResultSet resultSet = BancoDeDados.buscar("SELECT * FROM lista")) {
-            lista = FXCollections.observableArrayList();
-            while(resultSet.next()) {
-                Mensagem.addItemLista(
-                        new Mensagem(resultSet.getString("mensagem"), new Usuario(resultSet.getString("usuario")))
-                );
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+        List<Row> tabela = BancoDeDados.buscar("SELECT * FROM lista");
+
+        for (Row linha : tabela) {
+            Map.Entry<Object, Class> colunaMensagem = linha.row.get(0);
+            Map.Entry<Object, Class> colunaUsuario = linha.row.get(1);
+
+            String mensagem = (String) colunaMensagem.getValue().cast(colunaMensagem.getKey());
+            String usuario = (String) colunaUsuario.getValue().cast(colunaUsuario.getKey());
+
+            Mensagem mensagemObj = new Mensagem(mensagem, new Usuario(usuario));
+            System.out.println(mensagemObj);
+            Mensagem.addItemLista(mensagemObj);
         }
+
+        System.out.println();
+
         return lista;
     }
+
+    public String toString() {
+        return "Mensagem: " + this.mensagem + " - Usuario: " + this.usuario;
+    }
+
 }

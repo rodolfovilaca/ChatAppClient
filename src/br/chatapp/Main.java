@@ -1,7 +1,7 @@
 package br.chatapp;
 
 import br.chatapp.dao.Mensagem;
-import br.chatapp.utils.BancoDeDados;
+import br.chatapp.utils.db.BancoDeDados;
 import br.chatapp.views.GerenciadorDeTela;
 import javafx.application.Application;
 import javafx.stage.Stage;

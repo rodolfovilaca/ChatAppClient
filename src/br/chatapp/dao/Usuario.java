@@ -22,4 +22,8 @@ public class Usuario {
         return true;
     }
 
+    public String toString() {
+        return this.nome;
+    }
+
 }

@@ -1,6 +1,8 @@
-package br.chatapp.utils;
+package br.chatapp.utils.db;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class BancoDeDados {
@@ -11,13 +13,11 @@ public class BancoDeDados {
 
     public static boolean conectar() {
     	Statement declaracao = null;
-    	boolean retorno = false;
     	try{
     		conexao = DriverManager.getConnection("jdbc:sqlite:ChatApp.db");
     		declaracao = conexao.createStatement();
     		declaracao.execute(CREATE_TABLE);
-    		retorno = true;
-    		System.out.println(retorno);
+    		return true;
     	}catch (SQLException e) {
     		System.out.println("SQL Exception" + e.getMessage() + " SQL state: "+ e.getSQLState());
 		}finally {
@@ -27,17 +27,21 @@ public class BancoDeDados {
 				System.out.println("SQL Exception" + e.getMessage() + " SQL state: "+ e.getSQLState());
 			}
 		}
-    	return retorno;
+    	return false;
     }
 
     public static Connection getConnection() {
         return conexao;
     }
 
-    public static ResultSet buscar(String query) {
+    public static List<Row> buscar(String query) {
 		try(Statement declaracao = conexao.createStatement();
-			ResultSet resultSet = declaracao.executeQuery(query)){
-			return resultSet;
+			ResultSet resultSet = declaracao.executeQuery(query);){
+
+			List<Row> tabela = new ArrayList<Row>();
+			Row.formTable(resultSet, tabela);
+
+			return tabela;
 		}catch (SQLException e) {
 			System.out.println("SQL Exception" + e.getMessage() + " SQL state: "+ e.getSQLState());
 		}

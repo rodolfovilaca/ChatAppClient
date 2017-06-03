@@ -50,13 +50,6 @@ public class Mensagem {
         return Mensagem.buscarTodas();
     }
 
-    public boolean enviar(Mensagem msg) {
-        // Enviar pelo socket
-        BancoDeDados.adicionarMensagemBD(msg);
-
-        return true;
-    }
-
     public boolean enviar() {
         return BancoDeDados.inserir(ADICIONAR_MENSAGEM+"('"+this.getMensagem()+"','"+this.getUsuario().getNome()+"')");
     }

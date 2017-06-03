@@ -4,9 +4,11 @@ import br.chatapp.utils.BancoDeDados;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.awt.List;
-import java.sql.Connection;
+import java.sql.Array;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Mensagem {
@@ -50,5 +52,22 @@ public class Mensagem {
         BancoDeDados.adicionarMensagemBD(msg);
 
         return true;
+    }
+
+    public static List<Mensagem> buscarTodas() {
+        List<Mensagem> listaDeMensagens = new ArrayList<>();
+        try (ResultSet resultSet = BancoDeDados.query("SELECT * FROM lista")) {
+            while(resultSet.next()){
+                Mensagem msg = new Mensagem(resultSet.getString("mensagem"), new Usuario(resultSet.getString("usuario")));
+                listaDeMensagens.add(msg);
+            }
+            for(int i = Mensagem.getLista().size(); i< listaDeMensagens.size();i++){
+                Mensagem.getLista().add(listaDeMensagens.get(i));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

@@ -1,15 +1,11 @@
 package br.chatapp.utils;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import br.chatapp.dao.Mensagem;
 import br.chatapp.dao.Usuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.sql.*;
 
 
 public class BancoDeDados {
@@ -42,6 +38,16 @@ public class BancoDeDados {
     public static Connection getConnection() {
         return conexao;
     }
+
+    public static ResultSet query(String query) {
+		try(Statement declaracao = conexao.createStatement();
+			ResultSet resultSet = declaracao.executeQuery(query)){
+			return resultSet;
+		}catch (SQLException e) {
+			System.out.println("SQL Exception" + e.getMessage() + " SQL state: "+ e.getSQLState());
+		}
+		return null;
+	}
     
     public static boolean queryTodasMensagens(){
     	ObservableList<Mensagem> temp = FXCollections.observableArrayList();

@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 import br.chatapp.dao.Mensagem;
 import br.chatapp.dao.Usuario;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
@@ -43,15 +44,20 @@ public class BancoDeDados {
     }
     
     public static boolean queryTodasMensagens(){
+    	ObservableList<Mensagem> temp = FXCollections.observableArrayList();
     	try(Statement declaracao = conexao.createStatement();
     			ResultSet resultSet = declaracao.executeQuery("SELECT * FROM lista")){
     		while(resultSet.next()){
     			Mensagem msg = new Mensagem(resultSet.getString("mensagem"), new Usuario(resultSet.getString("usuario")));
-    			Mensagem.getLista().add(msg);
+    			temp.add(msg);
     		}
-    		for(Mensagem msrg: Mensagem.getLista()){
-    			System.out.println(msrg.getUsuario().getNome() +" "+ msrg.getMensagem());
+    		int num = temp.size() - Mensagem.getLista().size();
+    		for(int i = Mensagem.getLista().size(); i<temp.size();i++){
+    			Mensagem.getLista().add(temp.get(i));
     		}
+//    		for(Mensagem msrg: Mensagem.getLista()){
+//    			System.out.println(msrg.getUsuario().getNome() +" "+ msrg.getMensagem());
+//    		}
     		return true;
     	}catch (SQLException e) {
     		System.out.println("SQL Exception" + e.getMessage() + " SQL state: "+ e.getSQLState());

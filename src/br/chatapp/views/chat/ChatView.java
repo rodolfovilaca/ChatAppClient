@@ -6,6 +6,8 @@ import br.chatapp.dao.Usuario;
 import br.chatapp.dao.UsuarioSingleton;
 import br.chatapp.utils.BancoDeDados;
 import br.chatapp.views.GerenciadorDeTela;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -42,8 +44,15 @@ public class ChatView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+//    	ObservableList<Mensagem> teste = FXCollections.observableArrayList();
+//    	Mensagem msg1 = new Mensagem("Ola Rodolfo", new Usuario("Francisco"));
+//    	Mensagem msg2 = new Mensagem("Ola Francisco", new Usuario("Rodolfo"));
+//    	teste.add(msg1);
+//    	teste.add(msg2);
+    	
     	ChatController controller = new ChatController();
     	
+//    	listaChat.setItems(teste);
     	listaChat.setItems(Mensagem.getLista());
     	
     	listaChat.setCellFactory(cell -> new ListaChatCell());

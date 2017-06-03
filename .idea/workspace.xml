@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="486b9f75-b1f6-4a46-8c7a-af2c100d7ac5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/chatapp/dao/Mensagem.java" afterPath="$PROJECT_DIR$/src/br/chatapp/dao/Mensagem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/chatapp/utils/BancoDeDados.java" afterPath="$PROJECT_DIR$/src/br/chatapp/utils/BancoDeDados.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,8 +42,8 @@
       <file leaf-file-name="BancoDeDados.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/chatapp/utils/BancoDeDados.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="516">
-              <caret line="52" column="76" lean-forward="true" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="76" />
+            <state relative-caret-position="539">
+              <caret line="54" column="40" lean-forward="true" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -51,13 +52,15 @@
       <file leaf-file-name="Mensagem.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/br/chatapp/dao/Mensagem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="541">
-              <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+            <state relative-caret-position="496">
+              <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1011#1012#0" expanded="true" />
-                <element signature="e#1041#1042#0" expanded="true" />
-                <marker date="1496510669000" expanded="true" signature="1295:1323" ph="{...}" />
+                <element signature="e#1104#1105#0" expanded="true" />
+                <element signature="e#1134#1135#0" expanded="true" />
+                <element signature="e#1195#1196#0" expanded="true" />
+                <element signature="e#1240#1241#0" expanded="true" />
+                <marker date="1496511005000" expanded="true" signature="1361:1389" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -78,6 +81,7 @@
       <find>getPrimaryStage</find>
       <find>loginBtn</find>
       <find>num</find>
+      <find>ADICIONAR_MENSAGEM</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -102,8 +106,8 @@
         <option value="$PROJECT_DIR$/src/br/chatapp/controllers/ChatController.java" />
         <option value="$PROJECT_DIR$/src/br/chatapp/Main.java" />
         <option value="$PROJECT_DIR$/src/br/chatapp/views/chat/ChatView.java" />
-        <option value="$PROJECT_DIR$/src/br/chatapp/utils/BancoDeDados.java" />
         <option value="$PROJECT_DIR$/src/br/chatapp/dao/Usuario.java" />
+        <option value="$PROJECT_DIR$/src/br/chatapp/utils/BancoDeDados.java" />
         <option value="$PROJECT_DIR$/src/br/chatapp/dao/Mensagem.java" />
       </list>
     </option>
@@ -682,9 +686,11 @@
           <caret line="40" column="19" lean-forward="true" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1011#1012#0" expanded="true" />
-            <element signature="e#1041#1042#0" expanded="true" />
-            <marker date="1496510669000" expanded="true" signature="1295:1323" ph="{...}" />
+            <element signature="e#1104#1105#0" expanded="true" />
+            <element signature="e#1134#1135#0" expanded="true" />
+            <element signature="e#1195#1196#0" expanded="true" />
+            <element signature="e#1240#1241#0" expanded="true" />
+            <marker date="1496511005000" expanded="true" signature="1361:1389" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -821,21 +827,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/br/chatapp/utils/BancoDeDados.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="52" column="76" lean-forward="true" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="76" />
+        <state relative-caret-position="539">
+          <caret line="54" column="40" lean-forward="true" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/br/chatapp/dao/Mensagem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+        <state relative-caret-position="496">
+          <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1011#1012#0" expanded="true" />
-            <element signature="e#1041#1042#0" expanded="true" />
-            <marker date="1496510669000" expanded="true" signature="1295:1323" ph="{...}" />
+            <element signature="e#1104#1105#0" expanded="true" />
+            <element signature="e#1134#1135#0" expanded="true" />
+            <element signature="e#1195#1196#0" expanded="true" />
+            <element signature="e#1240#1241#0" expanded="true" />
+            <marker date="1496511005000" expanded="true" signature="1361:1389" ph="{...}" />
           </folding>
         </state>
       </provider>

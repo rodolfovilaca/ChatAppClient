@@ -1,9 +1,6 @@
 package br.chatapp.utils;
 
 import br.chatapp.dao.Mensagem;
-import br.chatapp.dao.Usuario;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.sql.*;
 
@@ -39,7 +36,7 @@ public class BancoDeDados {
         return conexao;
     }
 
-    public static ResultSet query(String query) {
+    public static ResultSet buscar(String query) {
 		try(Statement declaracao = conexao.createStatement();
 			ResultSet resultSet = declaracao.executeQuery(query)){
 			return resultSet;
@@ -48,28 +45,17 @@ public class BancoDeDados {
 		}
 		return null;
 	}
-    
-    public static boolean queryTodasMensagens(){
-    	ObservableList<Mensagem> temp = FXCollections.observableArrayList();
-    	try(Statement declaracao = conexao.createStatement();
-    			ResultSet resultSet = declaracao.executeQuery("SELECT * FROM lista")){
-    		while(resultSet.next()){
-    			Mensagem msg = new Mensagem(resultSet.getString("mensagem"), new Usuario(resultSet.getString("usuario")));
-    			temp.add(msg);
-    		}
-    		int num = temp.size() - Mensagem.getLista().size();
-    		for(int i = Mensagem.getLista().size(); i<temp.size();i++){
-    			Mensagem.getLista().add(temp.get(i));
-    		}
-//    		for(Mensagem msrg: Mensagem.getLista()){
-//    			System.out.println(msrg.getUsuario().getNome() +" "+ msrg.getMensagem());
-//    		}
-    		return true;
-    	}catch (SQLException e) {
-    		System.out.println("SQL Exception" + e.getMessage() + " SQL state: "+ e.getSQLState());
+
+
+	public static boolean inserir(String statement) {
+		try(Statement declaracao = conexao.createStatement()){
+			declaracao.execute(statement);
+			return true;
+		}catch (SQLException e) {
+			System.out.println("SQL Exception" + e.getMessage() + " SQL state: "+ e.getSQLState());
 		}
-    	return false;
-    }
+		return false;
+	}
     
     public static boolean adicionarMensagemBD(Mensagem msg){
     	try(Statement declaracao = conexao.createStatement()){

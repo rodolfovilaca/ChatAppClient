@@ -15,6 +15,7 @@ public class Mensagem {
     private String mensagem;
     private Usuario usuario;
     private static ObservableList<Mensagem> lista = FXCollections.observableArrayList();
+    private final String ADICIONAR_MENSAGEM = "INSERT INTO lista (mensagem,usuario) VALUES";
 
     public Mensagem(String mensagem, Usuario usuario) {
         this.mensagem = mensagem;
@@ -46,8 +47,7 @@ public class Mensagem {
     }
 
     public static ObservableList<Mensagem> getMensagens() {
-        BancoDeDados.queryTodasMensagens();
-        return lista;
+        return Mensagem.buscarTodas();
     }
 
     public boolean enviar(Mensagem msg) {
@@ -57,9 +57,13 @@ public class Mensagem {
         return true;
     }
 
-    public static List<Mensagem> buscarTodas() {
+    public boolean enviar() {
+        return BancoDeDados.inserir(ADICIONAR_MENSAGEM+"('"+this.getMensagem()+"','"+this.getUsuario().getNome()+"')");
+    }
+
+    public static ObservableList<Mensagem> buscarTodas() {
         List<Mensagem> listaDeMensagens = new ArrayList<>();
-        try (ResultSet resultSet = BancoDeDados.query("SELECT * FROM lista")) {
+        try (ResultSet resultSet = BancoDeDados.buscar("SELECT * FROM lista")) {
             while(resultSet.next()) {
                 Mensagem.addItemLista(
                         new Mensagem(resultSet.getString("mensagem"), new Usuario(resultSet.getString("usuario")))

@@ -37,15 +37,9 @@ public class ChatView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//    	ObservableList<Mensagem> teste = FXCollections.observableArrayList();
-//    	Mensagem msg1 = new Mensagem("Ola Rodolfo", new Usuario("Francisco"));
-//    	Mensagem msg2 = new Mensagem("Ola Francisco", new Usuario("Rodolfo"));
-//    	teste.add(msg1);
-//    	teste.add(msg2);
     	
     	ChatController controller = new ChatController();
     	
-//    	listaChat.setItems(teste);
     	listaChat.setItems(Mensagem.getLista());
     	
     	listaChat.setCellFactory(cell -> new ListaChatCell());
@@ -53,25 +47,11 @@ public class ChatView implements Initializable {
     	botaoEnviar.setOnAction(event ->{
     		boolean enviado = controller.enviarMensagem(areaTexto.getText(), UsuarioSingleton.get());
     		if (!enviado) {
-    		    areaTexto.setText("DEU MERDA NO ENVIO!");
+    		    areaTexto.setText("Cuidado: Envio não foi efetuado com sucesso!");
             } else {
                 areaTexto.setText("");
             }
-            Mensagem.buscarTodas();
-    		//alguma funï¿½ï¿½o pra enviar mensagem
     	});
-    	
-//        ChatController controller = new ChatController();
-//
-//        inicializarAreaDeConversas(controller.carregarMensagens());
-
-//        enviarMensagem.setOnAction(event-> {
-//            try {
-//                controller.enviarMensagem(mensagem.getText());
-//            } catch (Exception e) {
-//                System.out.println(e.getMessage());
-//            }
-//        });
     }
 
     public void apresentar() {

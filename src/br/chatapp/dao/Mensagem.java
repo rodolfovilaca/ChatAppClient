@@ -1,7 +1,7 @@
 package br.chatapp.dao;
 
 import br.chatapp.utils.db.BancoDeDados;
-import br.chatapp.utils.db.Row;
+import br.chatapp.utils.db.Linha;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -14,7 +14,7 @@ public class Mensagem {
     private String mensagem;
     private Usuario usuario;
     private static ObservableList<Mensagem> lista = FXCollections.observableArrayList();
-    private final String ADICIONAR_MENSAGEM = "INSERT INTO lista (mensagem,usuario) VALUES";
+    private final String ADICIONAR_MENSAGEM = "INSERT INTO Mensagem(mensagem_texto, buscar_usuario) VALUES";
 
     public Mensagem(String mensagem, Usuario usuario) {
         this.mensagem = mensagem;
@@ -48,9 +48,9 @@ public class Mensagem {
     public static ObservableList<Mensagem> getMensagens() {
         return Mensagem.buscarTodas();
     }
-
+    
     public boolean enviar() {
-        boolean enviado = BancoDeDados.inserir(ADICIONAR_MENSAGEM+"('"+this.getMensagem()+"','"+this.getUsuario().getNome()+"')");
+    	boolean enviado = BancoDeDados.inserir(ADICIONAR_MENSAGEM +"('"+this.getMensagem()+"','"+this.getUsuario().getForeignKeyId()+"')");
         if (enviado) {
             lista.add(this);
             return true;
@@ -60,20 +60,21 @@ public class Mensagem {
 
     public static ObservableList<Mensagem> buscarTodas() {
 
-        List<Row> tabela = BancoDeDados.buscar("SELECT * FROM lista");
+        List<Linha> tabela = BancoDeDados.buscar("SELECT * FROM lista_mensagens");
+        
+        if(tabela != null){
+        	for (Linha linha : tabela) {
+            	Map.Entry<Object, Class> colunaUsuario = linha.linha.get(0);
+                Map.Entry<Object, Class> colunaMensagem = linha.linha.get(1);
 
-        for (Row linha : tabela) {
-            Map.Entry<Object, Class> colunaMensagem = linha.row.get(0);
-            Map.Entry<Object, Class> colunaUsuario = linha.row.get(1);
-
-            String mensagem = (String) colunaMensagem.getValue().cast(colunaMensagem.getKey());
-            String usuario = (String) colunaUsuario.getValue().cast(colunaUsuario.getKey());
-
-            Mensagem mensagemObj = new Mensagem(mensagem, new Usuario(usuario));
-            System.out.println(mensagemObj);
-            Mensagem.addItemLista(mensagemObj);
+                String usuario = (String) colunaUsuario.getValue().cast(colunaUsuario.getKey());
+                String mensagem = (String) colunaMensagem.getValue().cast(colunaMensagem.getKey());
+                
+                Mensagem mensagemObj = new Mensagem(mensagem, new Usuario(usuario));
+                System.out.println(mensagemObj);
+                Mensagem.addItemLista(mensagemObj);
+            }
         }
-
         System.out.println();
 
         return lista;

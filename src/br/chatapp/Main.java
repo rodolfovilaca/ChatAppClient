@@ -20,7 +20,6 @@ public class Main extends Application {
 	public void init() throws Exception {
 		super.init();
 		conectadoComSucesso = BancoDeDados.conectar();
-		// Buscar todas as mensagens
 		Mensagem.buscarTodas();
 	}
 

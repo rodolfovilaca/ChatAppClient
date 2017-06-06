@@ -11,10 +11,11 @@ public class Cliente {
 	public static boolean conectar(){
 		try{
 			socket = new Socket("localhost", 5000);
+			return true;
 		}catch (IOException e) {
 			System.out.println("metodo Cliente.conectar()" + e.getMessage());
 		}
-		return true;
+		return false;
 	}
 	
 	public static boolean enviarMensagemSocket(String mensagem, Usuario usuario){

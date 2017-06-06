@@ -8,12 +8,11 @@ import java.util.List;
 public class BancoDeDados {
     private static Connection conexao;
     
-    private static final String CRIAR_VIEW = "CREATE VIEW IF NOT EXISTS lista_mensagens AS SELECT usuario_nome, mensagem_texto FROM Mensagem INNER JOIN Usuario ON buscar_usuario = usuario_id;";
+    private static final String CRIAR_VIEW = "CREATE VIEW IF NOT EXISTS lista_mensagens AS SELECT usuario_nome, mensagem_texto "
+    		+ "FROM Mensagem INNER JOIN Usuario ON buscar_usuario = usuario_id;";
     private static final String CRIAR_TABELA_MENSAGEM = "CREATE TABLE IF NOT EXISTS Mensagem (mensagem_id INTEGER PRIMARY KEY, mensagem_texto TEXT, "
     		+ "buscar_usuario INTEGER, FOREIGN KEY(buscar_usuario) REFERENCES usuario(usuario_id))";
     private static final String CRIAR_TABELA_USUARIO = "CREATE TABLE IF NOT EXISTS Usuario ( usuario_id INTEGER PRIMARY KEY, usuario_nome TEXT, UNIQUE(usuario_nome))";
-    private static final String ADICIONAR_MENSAGEM = "INSERT INTO lista (mensagem,usuario) VALUES";
-    private static final String ADICIONAR_USUARIO = "INSERT INTO Usuario (usuario) VALUES";
     
     public static boolean conectar() {
     	Statement declaracao = null;

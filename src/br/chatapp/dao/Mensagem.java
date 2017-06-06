@@ -1,10 +1,12 @@
 package br.chatapp.dao;
 
+import br.chatapp.utils.Cliente;
 import br.chatapp.utils.db.BancoDeDados;
 import br.chatapp.utils.db.Linha;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.net.Socket;
 import java.util.List;
 import java.util.Map;
 
@@ -50,8 +52,9 @@ public class Mensagem {
     }
     
     public boolean enviar() {
-    	boolean enviado = BancoDeDados.inserir(ADICIONAR_MENSAGEM +"('"+this.getMensagem()+"','"+this.getUsuario().getForeignKeyId()+"')");
-        if (enviado) {
+    	boolean enviadoDB = BancoDeDados.inserir(ADICIONAR_MENSAGEM +"('"+this.getMensagem()+"','"+this.getUsuario().getForeignKeyId()+"')");
+    	boolean enviadoSocket = Cliente.enviarMensagemSocket(this.getMensagem(),this.getUsuario());
+        if (enviadoDB && enviadoSocket) {
             lista.add(this);
             return true;
         }

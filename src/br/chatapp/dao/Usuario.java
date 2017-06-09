@@ -1,8 +1,11 @@
 package br.chatapp.dao;
 
+import java.io.Serializable;
+
 import br.chatapp.utils.db.BancoDeDados;
 
-public class Usuario {
+public class Usuario implements Serializable{
+	static final long serialVersionUID = 3632977338254009699L;
 
     private String nome;
     private final String ADICIONAR_USUARIO = "INSERT OR IGNORE INTO Usuario (usuario_nome) VALUES";

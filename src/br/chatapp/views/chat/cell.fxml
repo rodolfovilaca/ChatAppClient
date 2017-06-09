@@ -2,9 +2,9 @@
 
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
+<?import br.chatapp.views.bubble.BubbledLabel?>
 
 <HBox fx:id="hBox" xmlns:fx="http://javafx.com/fxml/1">
-	<Label fx:id="usuario"/>
-	<Label fx:id="mensagem" />
+	<BubbledLabel fx:id="mensagem"/>
 </HBox>
 

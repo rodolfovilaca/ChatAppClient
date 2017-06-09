@@ -8,10 +8,10 @@ import java.util.List;
 public class BancoDeDados {
     private static Connection conexao;
     
-    private static final String CRIAR_VIEW = "CREATE VIEW IF NOT EXISTS lista_mensagens AS SELECT usuario_nome, mensagem_texto "
+    private static final String CRIAR_VIEW = "CREATE VIEW IF NOT EXISTS lista_mensagens AS SELECT usuario_nome, mensagem_texto, mensagem_hora "
     		+ "FROM Mensagem INNER JOIN Usuario ON buscar_usuario = usuario_id;";
     private static final String CRIAR_TABELA_MENSAGEM = "CREATE TABLE IF NOT EXISTS Mensagem (mensagem_id INTEGER PRIMARY KEY, mensagem_texto TEXT, "
-    		+ "buscar_usuario INTEGER, FOREIGN KEY(buscar_usuario) REFERENCES usuario(usuario_id))";
+    		+ "mensagem_hora TEXT, buscar_usuario INTEGER, FOREIGN KEY(buscar_usuario) REFERENCES usuario(usuario_id))";
     private static final String CRIAR_TABELA_USUARIO = "CREATE TABLE IF NOT EXISTS Usuario ( usuario_id INTEGER PRIMARY KEY, usuario_nome TEXT, UNIQUE(usuario_nome))";
     
     public static boolean conectar() {
@@ -64,7 +64,6 @@ public class BancoDeDados {
 		return null;
 	}
 
-
 	public static boolean inserir(String statement) {
 		try(Statement declaracao = conexao.createStatement()){
 			declaracao.execute(statement);
@@ -87,5 +86,4 @@ public class BancoDeDados {
     public static void setConexao(Connection conexao) {
         BancoDeDados.conexao = conexao;
     }
-    
 }

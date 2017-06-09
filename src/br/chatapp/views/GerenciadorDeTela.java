@@ -4,6 +4,7 @@ import br.chatapp.views.login.LoginView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class GerenciadorDeTela {
             e.printStackTrace();
         }
         mainStage.setTitle(titulo);
-        mainStage.setScene(new Scene(root, largura, altura));
+        mainStage.setScene(new Scene(root, largura, altura,Color.AQUAMARINE));
         mainStage.show();
     }
 

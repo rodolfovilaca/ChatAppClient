@@ -9,7 +9,7 @@
 <?import javafx.geometry.Insets?>
 
 
-<VBox fx:controller="br.chatapp.views.chat.ChatView" xmlns:fx="http://javafx.com/fxml" spacing="10">
+<VBox id="vBoxChat" fx:controller="br.chatapp.views.chat.ChatView" styleClass="styleChat" xmlns:fx="http://javafx.com/fxml" spacing="10">
 	<ListView fx:id="listaChat">
 	</ListView>
 	<HBox spacing="10" >

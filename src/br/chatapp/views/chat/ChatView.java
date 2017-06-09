@@ -3,12 +3,20 @@ package br.chatapp.views.chat;
 import br.chatapp.controllers.ChatController;
 import br.chatapp.dao.Mensagem;
 import br.chatapp.dao.UsuarioSingleton;
+import br.chatapp.utils.Cliente;
 import br.chatapp.views.GerenciadorDeTela;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -40,6 +48,8 @@ public class ChatView implements Initializable {
     	
     	ChatController controller = new ChatController();
     	
+    	listaChat.setBackground(new Background(new BackgroundFill(Color.FLORALWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+    	
     	listaChat.setItems(Mensagem.getLista());
     	
     	listaChat.setCellFactory(cell -> new ListaChatCell());
@@ -51,6 +61,17 @@ public class ChatView implements Initializable {
             } else {
                 areaTexto.setText("");
             }
+    	});
+    	
+    	areaTexto.setOnKeyPressed(eventHandler -> {
+    		if(eventHandler.getCode() == KeyCode.ENTER){
+    			boolean enviado = controller.enviarMensagem(areaTexto.getText(), UsuarioSingleton.get());
+        		if (!enviado) {
+        		    areaTexto.setText("Cuidado: Envio não foi efetuado com sucesso!");
+                } else {
+                    areaTexto.setText("");
+                }
+    		}	
     	});
     }
 

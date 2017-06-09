@@ -5,6 +5,8 @@ import br.chatapp.utils.Cliente;
 import br.chatapp.utils.db.BancoDeDados;
 import br.chatapp.views.GerenciadorDeTela;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,6 +30,9 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		new Thread(()->{
+			Cliente.clienteBackground();
+		}).start();
 		mainStage = primaryStage;
         if (conectadoComSucessoDB && conectadoComSucessoServidor) {
             GerenciadorDeTela.inicializar(mainStage);

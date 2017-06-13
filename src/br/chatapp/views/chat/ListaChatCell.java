@@ -1,31 +1,23 @@
 package br.chatapp.views.chat;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import br.chatapp.dao.Mensagem;
-import br.chatapp.views.bubble.Bubble;
+import br.chatapp.dao.UsuarioSingleton;
 import br.chatapp.views.bubble.BubbleSpec;
 import br.chatapp.views.bubble.BubbledLabel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
+import javafx.geometry.Pos;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class ListaChatCell extends ListCell<Mensagem>{
-	
-//	@FXML
-//	Label usuario;
 	
 	@FXML
 	BubbledLabel mensagem;
@@ -49,10 +41,9 @@ public class ListaChatCell extends ListCell<Mensagem>{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-//			setStyle("-fx-control-inner-background: blue;");
-			mensagem.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE,null, null)));
-            mensagem.setBubbleSpec(BubbleSpec.FACE_LEFT_CENTER);
-			setBackground(new Background(new BackgroundFill(Color.FLORALWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+			
+            mensagem.setBubbleSpec(pegarBubbleSpec(item));
+			setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 			mensagem.setText(item.getHora()+" "+item.getUsuario().getNome()+": \n"+item.getMensagem());
 //			usuario.setFont(new Font("Cambria", 14));
 //			usuario.setText(item.getUsuario().getNome()+": ");
@@ -61,5 +52,16 @@ public class ListaChatCell extends ListCell<Mensagem>{
 		} else {
 			setGraphic(null);
 		}
+	}
+	
+	public BubbleSpec pegarBubbleSpec(Mensagem msg){
+		if(msg.getUsuario().getNome().equals(UsuarioSingleton.get().getNome())){
+			hBox.setAlignment(Pos.BOTTOM_RIGHT);
+			mensagem.setBackground(new Background(new BackgroundFill(Color.DODGERBLUE,null, null)));
+        	return BubbleSpec.FACE_RIGHT_BOTTOM;
+        	}
+		mensagem.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY,null, null)));
+		hBox.setAlignment(Pos.CENTER_LEFT);
+		return BubbleSpec.FACE_LEFT_CENTER;
 	}
 }

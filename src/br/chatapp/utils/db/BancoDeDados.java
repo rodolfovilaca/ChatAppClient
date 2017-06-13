@@ -1,6 +1,10 @@
 package br.chatapp.utils.db;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +37,6 @@ public class BancoDeDados {
 			}
 		}
     	return false;
-    }
-
-    public static Connection getConnection() {
-        return conexao;
     }
 
     public static int buscarId(String query){

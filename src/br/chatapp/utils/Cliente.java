@@ -1,21 +1,13 @@
 package br.chatapp.utils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
-import java.nio.Buffer;
-import java.util.function.Function;
-
-import javax.print.attribute.standard.RequestingUserName;
+import java.util.ArrayList;
 
 import br.chatapp.dao.Mensagem;
-import br.chatapp.dao.Usuario;
-import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
+import javafx.application.Platform;
 
 public class Cliente {
 	private static Socket socket;
@@ -34,14 +26,20 @@ public class Cliente {
 	}
 
 	public static void clienteBackground() {
-		Mensagem mensagemRecebida = null;
 		try {
 			input = new ObjectInputStream(socket.getInputStream());
+			try{
+				ArrayList<Mensagem> listaServer = (ArrayList<Mensagem>) input.readObject();
+				Platform.runLater(()-> Mensagem.adicionarTodasLista(listaServer));
+			}catch (ClassNotFoundException e) {
+				System.out.println("Cliente.Mensagem.adicionarTodasLista()" + e.getMessage());
+			}
+			
 			while (true) {
 				try{
-					mensagemRecebida = (Mensagem) input.readObject();
+					final Mensagem mensagemRecebida = (Mensagem) input.readObject();
 					System.out.println(mensagemRecebida);
-					Mensagem.getLista().add(mensagemRecebida);
+					Platform.runLater(()-> Mensagem.getLista().add(mensagemRecebida));
 				}catch (ClassNotFoundException e) {
 					System.out.println("metodo Cliente.clienteBackground()" + e.getMessage());
 				}
@@ -51,10 +49,9 @@ public class Cliente {
 		}
 
 	}
-	public static synchronized boolean enviarMensagemSocket(Mensagem mensagem) {
+	public static boolean enviarMensagemSocket(Mensagem mensagem) {
 		try {
 			output.writeObject(mensagem);
-//			output.flush();
 			output.reset();
 			return true;
 		} catch (IOException e) {
@@ -62,7 +59,25 @@ public class Cliente {
 		}
 		return false;
 	}
+	
+	public static boolean enviarLoginUsuarioServidor(Mensagem mensagem) {
+		try{
+			output.writeObject(mensagem);
+			return true;
+		}catch (IOException e) {
+			System.out.println("metodo Cliente.enviarUsuarioServidor()" + e.getMessage());
+		}
+		return false;
+	}
 
+	public static void deslogarClienteServidor(Mensagem mensagem){
+		try{
+			output.writeObject(mensagem);
+		}catch (IOException e) {
+			System.out.println("metodo Cliente.deslogarClienteServidor()" + e.getMessage());
+		}
+	}
+	
 	public static void fecharCliente() {
 		try {
 			input.close();

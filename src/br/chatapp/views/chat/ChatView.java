@@ -1,11 +1,14 @@
 package br.chatapp.views.chat;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 import br.chatapp.controllers.ChatController;
 import br.chatapp.dao.Mensagem;
 import br.chatapp.dao.UsuarioSingleton;
-import br.chatapp.utils.Cliente;
 import br.chatapp.views.GerenciadorDeTela;
-import javafx.event.EventHandler;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -17,10 +20,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 
 public class ChatView implements Initializable {
@@ -45,7 +44,6 @@ public class ChatView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    	
     	ChatController controller = new ChatController();
     	
     	listaChat.setBackground(new Background(new BackgroundFill(Color.FLORALWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -54,22 +52,29 @@ public class ChatView implements Initializable {
     	
     	listaChat.setCellFactory(cell -> new ListaChatCell());
     	
+    	Platform.runLater( () -> {
+    		listaChat.scrollTo(Mensagem.getLista().size()-1);
+    		areaTexto.requestFocus();
+    		});
+    	
     	botaoEnviar.setOnAction(event ->{
     		boolean enviado = controller.enviarMensagem(areaTexto.getText(), UsuarioSingleton.get());
     		if (!enviado) {
     		    areaTexto.setText("Cuidado: Envio não foi efetuado com sucesso!");
             } else {
-                areaTexto.setText("");
+                areaTexto.clear();
+                Platform.runLater( () -> listaChat.scrollTo(Mensagem.getLista().size()-1) );
             }
     	});
     	
-    	areaTexto.setOnKeyPressed(eventHandler -> {
+    	areaTexto.setOnKeyReleased(eventHandler -> {
     		if(eventHandler.getCode() == KeyCode.ENTER){
     			boolean enviado = controller.enviarMensagem(areaTexto.getText(), UsuarioSingleton.get());
         		if (!enviado) {
         		    areaTexto.setText("Cuidado: Envio não foi efetuado com sucesso!");
                 } else {
-                    areaTexto.setText("");
+                	areaTexto.clear();
+                    Platform.runLater( () -> listaChat.scrollTo(Mensagem.getLista().size()-1) );
                 }
     		}	
     	});

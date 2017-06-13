@@ -1,5 +1,8 @@
 package br.chatapp.views.login;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import br.chatapp.controllers.LoginController;
 import br.chatapp.views.GerenciadorDeTela;
 import javafx.fxml.FXML;
@@ -7,9 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
-import java.net.URL;
-import java.util.ResourceBundle;
+import javafx.scene.input.KeyCode;
 
 
 public class LoginView implements Initializable {
@@ -30,6 +31,15 @@ public class LoginView implements Initializable {
 
         loginBtn.setOnAction(event-> {
         	if(validar(name.getText())){
+        		try {
+                    new LoginController().loginUsuario(name.getText());
+                 } catch (Exception e) {
+                     System.out.println(e.getMessage());
+                 }
+        	}
+        });
+        name.setOnKeyPressed(event->{
+        	if((event.getCode() == KeyCode.ENTER) && validar(name.getText())){
         		try {
                     new LoginController().loginUsuario(name.getText());
                  } catch (Exception e) {

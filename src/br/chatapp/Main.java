@@ -32,7 +32,7 @@ public class Main extends Application {
 		new Thread(()->{
 				Cliente.clienteBackground();
 			}).start();
-		
+
 		mainStage = primaryStage;
         if (conectadoComSucessoServidor) {
             GerenciadorDeTela.inicializar(mainStage);

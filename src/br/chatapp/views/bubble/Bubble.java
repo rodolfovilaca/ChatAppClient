@@ -1,9 +1,11 @@
 package br.chatapp.views.bubble;
 
+import javafx.scene.shape.ArcTo;
 import javafx.scene.shape.HLineTo;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
+import javafx.scene.shape.StrokeType;
 import javafx.scene.shape.VLineTo;
 
 public class Bubble extends Path{
@@ -94,14 +96,24 @@ public class Bubble extends Path{
 	protected double drawRectBubbleIndicatorRule = 0.2;
 
 	private void drawRectBubbleLeftCenterIndicator() {
-		getElements().addAll(new MoveTo(1.0f, 2.5f),
-				new LineTo(1.2f, 2.4f),
-				new VLineTo(1f),
-				new HLineTo(2.9f),
-				new VLineTo(4f),
-				new HLineTo(1.2f),
-				new VLineTo(2.7f),
-				new LineTo(1.0f, 2.5f)
+		getElements().addAll(new MoveTo(100f, 250f),
+				new LineTo(120f, 240f),
+				new VLineTo(140f),
+//				new MoveTo(120f,120f),
+				new ArcTo(40f,40f,135,160f,100f,false,true),
+//				new MoveTo(140f,100f),
+				new HLineTo(250f),
+//				new MoveTo(270f,100f),
+				new ArcTo(40f,40f,45,290f,140f,false,true),
+				new VLineTo(360f),
+//				new MoveTo(290f,380f),
+				new ArcTo(40f,40f,275,250f,400f,false,true),
+				new HLineTo(160f),
+//				new MoveTo(140f,400f),
+				new ArcTo(40f,40f,215,120f,360f,false,true),
+				new VLineTo(270f),
+				new LineTo(100f, 250f)
 				);
 	}
+	
 }

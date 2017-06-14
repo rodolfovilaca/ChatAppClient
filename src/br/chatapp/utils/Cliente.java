@@ -29,6 +29,7 @@ public class Cliente {
 		try {
 			input = new ObjectInputStream(socket.getInputStream());
 			try{
+				@SuppressWarnings("unchecked")
 				ArrayList<Mensagem> listaServer = (ArrayList<Mensagem>) input.readObject();
 				Platform.runLater(()-> Mensagem.adicionarTodasLista(listaServer));
 			}catch (ClassNotFoundException e) {

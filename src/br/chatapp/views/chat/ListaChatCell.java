@@ -44,7 +44,7 @@ public class ListaChatCell extends ListCell<Mensagem>{
 			
             mensagem.setBubbleSpec(pegarBubbleSpec(item));
 			setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-			mensagem.setText(item.getHora()+" "+item.getUsuario().getNome()+": \n"+item.getMensagem());
+			mensagem.setText(item.getHora()+" "+pegarNome(item)+" disse: \n"+item.getMensagem());
 //			usuario.setFont(new Font("Cambria", 14));
 //			usuario.setText(item.getUsuario().getNome()+": ");
 //			mensagem.setText(item.getMensagem());
@@ -54,13 +54,21 @@ public class ListaChatCell extends ListCell<Mensagem>{
 		}
 	}
 	
+	public String pegarNome(Mensagem msg){
+		String nome = msg.getUsuario().getNome();
+		if(msg.getUsuario().getNome().equals(UsuarioSingleton.get().getNome())){
+			nome = "Você";
+		}
+		return nome;
+	}
+	
 	public BubbleSpec pegarBubbleSpec(Mensagem msg){
 		if(msg.getUsuario().getNome().equals(UsuarioSingleton.get().getNome())){
 			hBox.setAlignment(Pos.BOTTOM_RIGHT);
-			mensagem.setBackground(new Background(new BackgroundFill(Color.DODGERBLUE,null, null)));
+			mensagem.setBackground(new Background(new BackgroundFill(Color.DODGERBLUE,CornerRadii.EMPTY, Insets.EMPTY)));
         	return BubbleSpec.FACE_RIGHT_BOTTOM;
         	}
-		mensagem.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY,null, null)));
+		mensagem.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY, Insets.EMPTY)));
 		hBox.setAlignment(Pos.CENTER_LEFT);
 		return BubbleSpec.FACE_LEFT_CENTER;
 	}

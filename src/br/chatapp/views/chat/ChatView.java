@@ -46,36 +46,39 @@ public class ChatView implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     	ChatController controller = new ChatController();
     	
-    	listaChat.setBackground(new Background(new BackgroundFill(Color.FLORALWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-    	
     	listaChat.setItems(Mensagem.getLista());
     	
     	listaChat.setCellFactory(cell -> new ListaChatCell());
     	
     	Platform.runLater( () -> {
     		listaChat.scrollTo(Mensagem.getLista().size()-1);
+    		listaChat.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     		areaTexto.requestFocus();
     		});
     	
     	botaoEnviar.setOnAction(event ->{
-    		boolean enviado = controller.enviarMensagem(areaTexto.getText(), UsuarioSingleton.get());
-    		if (!enviado) {
-    		    areaTexto.setText("Cuidado: Envio não foi efetuado com sucesso!");
-            } else {
-                areaTexto.clear();
-                Platform.runLater( () -> listaChat.scrollTo(Mensagem.getLista().size()-1) );
-            }
-    	});
-    	
-    	areaTexto.setOnKeyReleased(eventHandler -> {
-    		if(eventHandler.getCode() == KeyCode.ENTER){
+    		if(!areaTexto.getText().equals("/n") && !areaTexto.getText().equals("")){
     			boolean enviado = controller.enviarMensagem(areaTexto.getText(), UsuarioSingleton.get());
         		if (!enviado) {
         		    areaTexto.setText("Cuidado: Envio não foi efetuado com sucesso!");
                 } else {
-                	areaTexto.clear();
+                    areaTexto.clear();
                     Platform.runLater( () -> listaChat.scrollTo(Mensagem.getLista().size()-1) );
                 }
+    		}
+    	});
+    	
+    	areaTexto.setOnKeyReleased(eventHandler -> {
+    		if(eventHandler.getCode() == KeyCode.ENTER){
+    			if(!areaTexto.getText().equals("/n") && !areaTexto.getText().equals("")){
+        			boolean enviado = controller.enviarMensagem(areaTexto.getText(), UsuarioSingleton.get());
+            		if (!enviado) {
+            		    areaTexto.setText("Cuidado: Envio não foi efetuado com sucesso!");
+                    } else {
+                        areaTexto.clear();
+                        Platform.runLater( () -> listaChat.scrollTo(Mensagem.getLista().size()-1) );
+                    }
+        		}
     		}	
     	});
     }

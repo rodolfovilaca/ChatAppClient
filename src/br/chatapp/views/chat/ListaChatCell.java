@@ -4,12 +4,11 @@ import java.io.IOException;
 
 import br.chatapp.dao.Mensagem;
 import br.chatapp.dao.UsuarioSingleton;
-import br.chatapp.views.bubble.BubbleSpec;
-import br.chatapp.views.bubble.BubbledLabel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -20,7 +19,13 @@ import javafx.scene.paint.Color;
 public class ListaChatCell extends ListCell<Mensagem>{
 	
 	@FXML
-	BubbledLabel mensagem;
+	Label mensagem;
+	
+	@FXML
+	Label trianguloEsquerda;
+	
+	@FXML
+	Label trianguloDireita;
 
 	@FXML
 	HBox hBox;
@@ -41,9 +46,16 @@ public class ListaChatCell extends ListCell<Mensagem>{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-            mensagem.setBubbleSpec(pegarBubbleSpec(item));
-			setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+			pegarAlinhamento(item);
+//			trianguloDireita.setStyle("-fx-background-color: mediumturquoise;-fx-padding: 5 5 5 25;"
+//					+ "-fx-border-radius: 10 10 10 10;-fx-background-radius: 10 10 10 10;"
+//					+ "-fx-font-size: 12px;"
+//					+ "-fx-effect: dropshadow(one-pass-box, darkgrey, 4, 0.3, 0, 0);"
+//					+ "-fx-background-insets: 0,1;");
+//			mensagem.getStylesheets().add("mensagem");
+//			mensagem.getStyleClass().add(getClass().getResource("label1").toExternalForm());
+//            mensagem.setBubbleSpec(pegarBubbleSpec(item));
+			setBackground(new Background(new BackgroundFill(Color.WHITESMOKE, CornerRadii.EMPTY, Insets.EMPTY)));
 			mensagem.setText(item.getHora()+" "+pegarNome(item)+" disse: \n"+item.getMensagem());
 //			usuario.setFont(new Font("Cambria", 14));
 //			usuario.setText(item.getUsuario().getNome()+": ");
@@ -62,14 +74,16 @@ public class ListaChatCell extends ListCell<Mensagem>{
 		return nome;
 	}
 	
-	public BubbleSpec pegarBubbleSpec(Mensagem msg){
+	public void pegarAlinhamento(Mensagem msg){
 		if(msg.getUsuario().getNome().equals(UsuarioSingleton.get().getNome())){
-			hBox.setAlignment(Pos.BOTTOM_RIGHT);
-			mensagem.setBackground(new Background(new BackgroundFill(Color.DODGERBLUE,CornerRadii.EMPTY, Insets.EMPTY)));
-        	return BubbleSpec.FACE_RIGHT_BOTTOM;
+			mensagem.setId("mensagem_direita");
+			trianguloDireita.setVisible(true);
+			trianguloDireita.setAlignment(Pos.BOTTOM_RIGHT);
+			hBox.setAlignment(Pos.BASELINE_RIGHT);
+			return;
         	}
-		mensagem.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY, Insets.EMPTY)));
-		hBox.setAlignment(Pos.CENTER_LEFT);
-		return BubbleSpec.FACE_LEFT_CENTER;
+		hBox.setAlignment(Pos.BASELINE_LEFT);
+		trianguloEsquerda.setVisible(true);
+		trianguloEsquerda.setAlignment(Pos.BOTTOM_LEFT);
 	}
 }

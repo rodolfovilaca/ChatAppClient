@@ -16,7 +16,7 @@ public class Cliente {
 
 	public static boolean conectar() {
 		try {
-			socket = new Socket("localhost", 5000);
+			socket = new Socket("104.131.147.102", 5000);
 			output = new ObjectOutputStream (socket.getOutputStream());
 			return true;
 		} catch (IOException e) {

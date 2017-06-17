@@ -9,10 +9,10 @@ public class LoginController{
 
     public void loginUsuario(String nome) {
 
-        UsuarioSingleton.inicializar(nome);
-        boolean salvoComSucesso = UsuarioSingleton.get().salvar();
+    	boolean iniciadoComSucesso = UsuarioSingleton.inicializar(nome);
+//        boolean salvoComSucesso = UsuarioSingleton.get().salvar();
 
-        if (salvoComSucesso){
+        if (iniciadoComSucesso){
         	Cliente.enviarLoginUsuarioServidor(new Mensagem("logando", UsuarioSingleton.get()));
             new ChatView().apresentar();
         }

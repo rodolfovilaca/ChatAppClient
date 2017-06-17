@@ -2,6 +2,7 @@ package br.chatapp.views;
 
 import java.io.IOException;
 
+import br.chatapp.views.chat.ChatView;
 import br.chatapp.views.login.LoginView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +14,7 @@ import javafx.stage.Stage;
 public class GerenciadorDeTela {
 
     private static Stage mainStage;
-
+    
     public static void inicializar(Stage _mainStage) {
         mainStage = _mainStage;
         new LoginView().apresentar();
@@ -28,7 +29,11 @@ public class GerenciadorDeTela {
             e.printStackTrace();
         }
         mainStage.setTitle(titulo);
-        mainStage.setScene(new Scene(root, largura, altura,Color.AQUAMARINE));
+        Scene scene = new Scene(root, largura, altura,Color.AQUAMARINE);
+        if(classe.getClass().equals(ChatView.class)){
+        	scene.getStylesheets().add(classe.getClass().getResource("styleChat.css").toExternalForm());
+        }    
+        mainStage.setScene(scene);
         mainStage.show();
     }
 

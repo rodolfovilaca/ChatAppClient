@@ -40,7 +40,7 @@ public class Main extends Application {
             throw new IOException("Banco de dados ou Servidor não iniciado");
         }
 	}
-
+	
 	@Override
 	public void stop() throws Exception {
 		super.stop();

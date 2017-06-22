@@ -9,14 +9,8 @@ import br.chatapp.dao.Usuario;
 public class ChatController {
     public boolean enviarMensagem(String texto, Usuario usuario) {
     	Mensagem mensagem = new Mensagem(texto, usuario);
-    	mensagem.setHora(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
+    	mensagem.setHora(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
     	boolean enviado = mensagem.enviar();
     	return enviado;
     }
-
-//    public ObservableList<Mensagem> carregarMensagens() {
-//        // return new ArrayList<Mensagem>();
-//        return Mensagem.getMensagens();
-//    }
-
 }

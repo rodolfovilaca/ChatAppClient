@@ -16,7 +16,7 @@ public class Cliente {
 
 	public static boolean conectar() {
 		try {
-			socket = new Socket("104.131.147.102", 5000);
+			socket = new Socket("localhost", 5000);
 			output = new ObjectOutputStream (socket.getOutputStream());
 			return true;
 		} catch (IOException e) {
@@ -83,6 +83,7 @@ public class Cliente {
 		try {
 			input.close();
 			output.close();
+			socket.close();
 		} catch (IOException e) {
 			System.out.println("metodo Cliente.close()" + e.getMessage());
 		}

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.shape.Shape?>
+<?import javafx.scene.layout.GridPane?>
 
-<HBox fx:id="hBox" xmlns:fx="http://javafx.com/fxml/1">
-	<Label fx:id="trianguloEsquerda" visible="false"/>
-	<Label fx:id="mensagem"/>
-	<Label fx:id="trianguloDireita" visible="false"/>
-</HBox>
+<GridPane fx:id="gridTotal" xmlns:fx="http://javafx.com/fxml/1" maxWidth="470">
+	<Label fx:id="trianguloEsquerda" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+	<GridPane fx:id="gridTexts" GridPane.columnIndex="1" GridPane.rowIndex="0">
+		<Label fx:id="mensagem" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+		<Label fx:id="hora" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+	</GridPane>
+	<Label fx:id="trianguloDireita" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+</GridPane>
 

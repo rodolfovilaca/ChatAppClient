@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	private static Stage mainStage;
-//	private static boolean conectadoComSucessoDB;
 	private static boolean conectadoComSucessoServidor;
 	
 	public static void main(String[] args) {
@@ -22,9 +21,7 @@ public class Main extends Application {
 	@Override
 	public void init() throws Exception {
 		super.init();
-//		conectadoComSucessoDB = BancoDeDados.conectar();
 		conectadoComSucessoServidor = Cliente.conectar();
-//		Mensagem.buscarTodas();
 	}
 
 	@Override
@@ -44,10 +41,9 @@ public class Main extends Application {
 	@Override
 	public void stop() throws Exception {
 		super.stop();
-		Mensagem deslogarServidor = new Mensagem("deslogando", UsuarioSingleton.get());
+		Mensagem deslogarServidor = new Mensagem("deslogando", UsuarioSingleton.pegarInstancia());
 		deslogarServidor.setEstado(Estado.DISCONECTADO);
 		Cliente.deslogarClienteServidor(deslogarServidor);
 		Cliente.fecharCliente();
-//		BancoDeDados.fecharConexao();
 	}
 }

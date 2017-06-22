@@ -3,6 +3,10 @@ package br.chatapp.dao;
 public class UsuarioSingleton {
 	private static Usuario usuario;
 	
+	private UsuarioSingleton(){
+		
+	}
+	
 	public static boolean inicializar(String nome) {
 		if(usuario == null){
 			usuario = new Usuario(nome);
@@ -10,7 +14,8 @@ public class UsuarioSingleton {
 		}
 		return false;
 	}
-	public static Usuario get() {
+	
+	public static Usuario pegarInstancia() {
 		return usuario;
 	}
 	

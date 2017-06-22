@@ -8,32 +8,41 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class ListaChatCell extends ListCell<Mensagem>{
 	
 	@FXML
-	Label mensagem;
+	private Label mensagem;
 	
 	@FXML
-	Label trianguloEsquerda;
+	private Label trianguloEsquerda;
 	
 	@FXML
-	Label trianguloDireita;
+	private Label trianguloDireita;
+	
+	@FXML
+	private Label hora;
 
 	@FXML
-	HBox hBox;
+	private GridPane gridTotal;
+	
+	@FXML
+	private GridPane gridTexts;
 	
 	public ListaChatCell() {
 		
 	}
 	
+	@SuppressWarnings("static-access")
 	@Override
 	protected void updateItem(Mensagem item, boolean empty) {
 		super.updateItem(item, empty);
@@ -47,20 +56,18 @@ public class ListaChatCell extends ListCell<Mensagem>{
 				e.printStackTrace();
 			}
 			pegarAlinhamento(item);
-//			trianguloDireita.setStyle("-fx-background-color: mediumturquoise;-fx-padding: 5 5 5 25;"
-//					+ "-fx-border-radius: 10 10 10 10;-fx-background-radius: 10 10 10 10;"
-//					+ "-fx-font-size: 12px;"
-//					+ "-fx-effect: dropshadow(one-pass-box, darkgrey, 4, 0.3, 0, 0);"
-//					+ "-fx-background-insets: 0,1;");
-//			mensagem.getStylesheets().add("mensagem");
-//			mensagem.getStyleClass().add(getClass().getResource("label1").toExternalForm());
-//            mensagem.setBubbleSpec(pegarBubbleSpec(item));
-			setBackground(new Background(new BackgroundFill(Color.WHITESMOKE, CornerRadii.EMPTY, Insets.EMPTY)));
-			mensagem.setText(item.getHora()+" "+pegarNome(item)+" disse: \n"+item.getMensagem());
-//			usuario.setFont(new Font("Cambria", 14));
-//			usuario.setText(item.getUsuario().getNome()+": ");
-//			mensagem.setText(item.getMensagem());
-			setGraphic(hBox);
+			setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+			mensagem.setWrapText(true);
+			mensagem.setMaxWidth(398);
+			mensagem.setText(pegarNome(item)+":\n"+item.getMensagem());
+			mensagem.setFont(new Font(13));
+			mensagem.setPadding(new Insets(0,20,-10,0));
+			hora.setText(item.getHora().substring(10,16));
+			hora.setFont(new Font(11));
+			hora.setTextFill(Color.DIMGRAY);
+			gridTexts.setValignment(hora, VPos.TOP);
+			gridTexts.setValignment(mensagem, VPos.BOTTOM);
+			setGraphic(gridTotal);
 		} else {
 			setGraphic(null);
 		}
@@ -68,21 +75,21 @@ public class ListaChatCell extends ListCell<Mensagem>{
 	
 	public String pegarNome(Mensagem msg){
 		String nome = msg.getUsuario().getNome();
-		if(msg.getUsuario().getNome().equals(UsuarioSingleton.get().getNome())){
+		if(msg.getUsuario().getNome().equals(UsuarioSingleton.pegarInstancia().getNome())){
 			nome = "Você";
 		}
 		return nome;
 	}
 	
 	public void pegarAlinhamento(Mensagem msg){
-		if(msg.getUsuario().getNome().equals(UsuarioSingleton.get().getNome())){
-			mensagem.setId("mensagem_direita");
+		if(msg.getUsuario().getNome().equals(UsuarioSingleton.pegarInstancia().getNome())){
+			gridTexts.setId("mensagem_direita");
 			trianguloDireita.setVisible(true);
 			trianguloDireita.setAlignment(Pos.BOTTOM_RIGHT);
-			hBox.setAlignment(Pos.BASELINE_RIGHT);
+			gridTotal.setAlignment(Pos.BASELINE_RIGHT);
 			return;
         	}
-		hBox.setAlignment(Pos.BASELINE_LEFT);
+		gridTotal.setAlignment(Pos.BASELINE_LEFT);
 		trianguloEsquerda.setVisible(true);
 		trianguloEsquerda.setAlignment(Pos.BOTTOM_LEFT);
 	}

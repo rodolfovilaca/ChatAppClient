@@ -1,7 +1,6 @@
 package br.chatapp.views.chat;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import br.chatapp.controllers.ChatController;
@@ -26,28 +25,22 @@ public class ChatView implements Initializable {
 
 	
     @FXML
-    Button enviarMensagem;
+    private Button enviarMensagem;
     
     @FXML
-    TextArea areaTexto;
+    private TextArea areaTexto;
     
     @FXML
-    Button botaoEnviar;
+    private Button botaoEnviar;
     
     @FXML
-    ListView<Mensagem> listaChat;
-
-
-    public void inicializarAreaDeConversas(ArrayList<Mensagem> mensagems) {
-        // TODO
-    }
+    private ListView<Mensagem> listaChat;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	ChatController controller = new ChatController();
     	
     	listaChat.setItems(Mensagem.getLista());
-    	
     	listaChat.setCellFactory(cell -> new ListaChatCell());
     	
     	Platform.runLater( () -> {
@@ -58,7 +51,7 @@ public class ChatView implements Initializable {
     	
     	botaoEnviar.setOnAction(event ->{
     		if(!areaTexto.getText().equals("/n") && !areaTexto.getText().equals("")){
-    			boolean enviado = controller.enviarMensagem(areaTexto.getText(), UsuarioSingleton.get());
+    			boolean enviado = controller.enviarMensagem(areaTexto.getText(), UsuarioSingleton.pegarInstancia());
         		if (!enviado) {
         		    areaTexto.setText("Cuidado: Envio não foi efetuado com sucesso!");
                 } else {
@@ -71,7 +64,7 @@ public class ChatView implements Initializable {
     	areaTexto.setOnKeyReleased(eventHandler -> {
     		if(eventHandler.getCode() == KeyCode.ENTER){
     			if(!areaTexto.getText().equals("/n") && !areaTexto.getText().equals("")){
-        			boolean enviado = controller.enviarMensagem(areaTexto.getText(), UsuarioSingleton.get());
+        			boolean enviado = controller.enviarMensagem(areaTexto.getText(), UsuarioSingleton.pegarInstancia());
             		if (!enviado) {
             		    areaTexto.setText("Cuidado: Envio não foi efetuado com sucesso!");
                     } else {

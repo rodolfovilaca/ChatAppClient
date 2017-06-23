@@ -40,6 +40,8 @@ public class ChatView implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     	ChatController controller = new ChatController();
     	
+    	areaTexto.setWrapText(true);
+    	
     	listaChat.setItems(Mensagem.getLista());
     	listaChat.setCellFactory(cell -> new ListaChatCell());
     	

@@ -25,7 +25,7 @@ public class Mensagem implements Serializable{
     }
     
     public enum Estado{
-    	CONECTADO, DISCONECTADO;
+    	CONECTADO, DESCONECTADO, CONECTANDO;
     }
     
     public Estado getEstado(){
@@ -71,7 +71,7 @@ public class Mensagem implements Serializable{
     }
     
     public boolean enviar() {
-    	boolean enviadoSocket = Cliente.enviarMensagemSocket(this);
+    	boolean enviadoSocket = Cliente.pegarInstancia().enviarMensagemSocket(this);
         if (enviadoSocket) {
             return true;
         }

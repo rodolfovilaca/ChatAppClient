@@ -10,15 +10,10 @@ import br.chatapp.views.GerenciadorDeTela;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
 
 
 public class ChatView implements Initializable {
@@ -47,7 +42,6 @@ public class ChatView implements Initializable {
     	
     	Platform.runLater( () -> {
     		listaChat.scrollTo(Mensagem.getLista().size()-1);
-    		listaChat.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     		areaTexto.requestFocus();
     		});
     	

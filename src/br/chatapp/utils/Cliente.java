@@ -13,8 +13,17 @@ public class Cliente {
 	private static Socket socket;
 	private static ObjectOutputStream output;
 	private static ObjectInputStream input;
+	private static Cliente instancia = new Cliente();
+	
+	private Cliente (){
+		
+	}
+	
+	public static Cliente pegarInstancia(){
+		return instancia;
+	}
 
-	public static boolean conectar() {
+	public boolean conectar() {
 		try {
 			socket = new Socket("localhost", 5000);
 			output = new ObjectOutputStream (socket.getOutputStream());
@@ -25,7 +34,7 @@ public class Cliente {
 		return false;
 	}
 
-	public static void clienteBackground() {
+	public void clienteBackground() {
 		try {
 			input = new ObjectInputStream(socket.getInputStream());
 			try{
@@ -50,7 +59,7 @@ public class Cliente {
 		}
 
 	}
-	public static boolean enviarMensagemSocket(Mensagem mensagem) {
+	public boolean enviarMensagemSocket(Mensagem mensagem) {
 		try {
 			output.writeObject(mensagem);
 			output.reset();
@@ -61,7 +70,7 @@ public class Cliente {
 		return false;
 	}
 	
-	public static boolean enviarLoginUsuarioServidor(Mensagem mensagem) {
+	public boolean enviarLoginUsuarioServidor(Mensagem mensagem) {
 		try{
 			output.writeObject(mensagem);
 			return true;
@@ -71,7 +80,7 @@ public class Cliente {
 		return false;
 	}
 
-	public static void deslogarClienteServidor(Mensagem mensagem){
+	public void deslogarClienteServidor(Mensagem mensagem){
 		try{
 			output.writeObject(mensagem);
 		}catch (IOException e) {
@@ -79,7 +88,7 @@ public class Cliente {
 		}
 	}
 	
-	public static void fecharCliente() {
+	public void fecharCliente() {
 		try {
 			input.close();
 			output.close();

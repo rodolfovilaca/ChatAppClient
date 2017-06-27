@@ -55,10 +55,10 @@
     -fx-background-insets: 0,1;
 }
 
-#listaChat{
-  -fx-background: -fx-control-inner-background ;
-  -fx-background-color: -fx-table-cell-border-color, -fx-background ;
-  -fx-background-insets: 0, 0 0 1 0 ;
-  -fx-table-cell-border-color: derive(-fx-color, 5%);
+#listaChat .list-cell:odd { 
+	-fx-background-color: white;
+	
 }
-
+#listaChat .list-cell:even{
+	-fx-background-color: white;
+}

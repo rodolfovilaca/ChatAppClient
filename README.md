@@ -1,3 +1,4 @@
 # ChatAppClient
 A simple Chat Application
-http://imgur.com/JSsKPIl
+
+![Alt Text](http://imgur.com/JSsKPIl)

@@ -1,4 +1,6 @@
 # ChatAppClient
 A simple Chat Application
 
-![Alt Text](https://media.giphy.com/media/3owvK4Qqq08iJmJKLe/giphy.gif)
+![Alt Text](https://thumbs.gfycat.com/ImmaculateOblongKingbird-size_restricted.gif)
+
+https://gfycat.com/gifs/detail/immaculateoblongkingbird

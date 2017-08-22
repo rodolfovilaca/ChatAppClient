@@ -1,4 +1,4 @@
 # ChatAppClient
 A simple Chat Application
 
-![Alt Text](http://i.imgur.com/y8GfepG.gif)
+![Alt Text](https://media.giphy.com/media/3owvK4Qqq08iJmJKLe/giphy.gif)
